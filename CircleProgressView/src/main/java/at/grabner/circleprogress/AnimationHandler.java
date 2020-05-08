@@ -109,7 +109,7 @@ public class AnimationHandler extends Handler {
                         float length_delta = circleView.mSpinningBarLengthCurrent - circleView.mSpinningBarLengthOrig;
                         float t = (float) ((System.currentTimeMillis() - mLengthChangeAnimationStartTime)
                                 / mLengthChangeAnimationDuration);
-                        t = t > 1.0f ? 1.0f : t;
+                        t = Math.min(t, 1.0f);
                         float interpolatedRatio = mLengthChangeInterpolator.getInterpolation(t);
 
                         if (Math.abs(length_delta) < 1) {
@@ -159,7 +159,7 @@ public class AnimationHandler extends Handler {
 
                         float t = (float) ((System.currentTimeMillis() - mLengthChangeAnimationStartTime)
                                 / mLengthChangeAnimationDuration);
-                        t = t > 1.0f ? 1.0f : t;
+                        t = Math.min(t, 1.0f);
                         float interpolatedRatio = mLengthChangeInterpolator.getInterpolation(t);
                         circleView.mSpinningBarLengthCurrent = (mSpinningBarLengthStart) * (1f - interpolatedRatio);
 
@@ -205,7 +205,7 @@ public class AnimationHandler extends Handler {
                             //spinner to long, --> shrink
                             float t = (float) ((System.currentTimeMillis() - mLengthChangeAnimationStartTime)
                                     / mLengthChangeAnimationDuration);
-                            t = t > 1.0f ? 1.0f : t;
+                            t = Math.min(t, 1.0f);
                             float interpolatedRatio = mLengthChangeInterpolator.getInterpolation(t);
                             circleView.mSpinningBarLengthCurrent = (mSpinningBarLengthStart) * (1f - interpolatedRatio);
                         }
@@ -231,7 +231,7 @@ public class AnimationHandler extends Handler {
 
                             float t = (float) ((System.currentTimeMillis() - mLengthChangeAnimationStartTime)
                                     / mLengthChangeAnimationDuration);
-                            t = t > 1.0f ? 1.0f : t;
+                            t = Math.min(t, 1.0f);
                             float interpolatedRatio = mLengthChangeInterpolator.getInterpolation(t);
                             circleView.mSpinningBarLengthCurrent = (mSpinningBarLengthStart) * (1f - interpolatedRatio);
                         }
@@ -366,7 +366,7 @@ public class AnimationHandler extends Handler {
     private boolean calcNextAnimationValue(CircleProgressView circleView) {
         float t = (float) ((System.currentTimeMillis() - mAnimationStartTime)
                 / circleView.mAnimationDuration);
-        t = t > 1.0f ? 1.0f : t;
+        t = Math.min(t, 1.0f);
         float interpolatedRatio = mInterpolator.getInterpolation(t);
 
         circleView.mCurrentValue = (circleView.mValueFrom + ((circleView.mValueTo - circleView.mValueFrom) * interpolatedRatio));
